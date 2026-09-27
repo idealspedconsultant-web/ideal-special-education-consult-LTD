@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Connection test document
+    match /test/{docId} {
+      allow read, write: if true;
+    }
+
+    // Public session bookings submission
+    match /bookings/{bookingId} {
+      allow create: if request.resource.data.keys().hasAll(['id', 'fullName', 'email', 'serviceId']);
+      allow read, update, delete: if true;
+    }
+
+    // Public contact inquiries submission
+    match /contacts/{contactId} {
+      allow create: if request.resource.data.keys().hasAll(['id', 'fullName', 'email', 'message']);
+      allow read, update, delete: if true;
+    }
+
+    // Public donation contributions in Naira
+    match /donations/{donationId} {
+      allow create: if request.resource.data.keys().hasAll(['id', 'fullName', 'amount']);
+      allow read, update, delete: if true;
+    }
+
+    // Email4J notifications log for authorized staff
+    match /email_notifications/{notificationId} {
+      allow create, read, update, delete: if true;
+    }
+  }
+}

@@ -1,0 +1,236 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-surface: #f7f9ff;
+    --color-surface-dim: #d1dbea;
+    --color-surface-bright: #f7f9ff;
+    --color-surface-container-lowest: #ffffff;
+    --color-surface-container-low: #eef4ff;
+    --color-surface-container: #e4effe;
+    --color-surface-container-high: #dfe9f8;
+    --color-surface-container-highest: #d9e3f2;
+    --color-on-surface: #121c27;
+    --color-on-surface-variant: #41474f;
+    --color-outline: #717880;
+    --color-outline-variant: #c1c7d0;
+    --color-primary: #004872;
+    --color-on-primary: #ffffff;
+    --color-primary-container: #1b6091;
+    --color-on-primary-container: #b3d8ff;
+    --color-secondary: #366a1d;
+    --color-on-secondary: #ffffff;
+    --color-secondary-container: #b3f092;
+    --color-on-secondary-container: #3a6f21;
+    --color-error: #ba1a1a;
+  }
+
+  html {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--color-on-surface);
+    background-color: var(--color-surface);
+    scroll-behavior: smooth;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .font-headline {
+    font-family: 'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif;
+  }
+}
+
+/* Accessibility Text Scaling (Visual Impairment & Low-Vision Support) */
+html.text-scale-large,
+.text-scale-large {
+  font-size: 115% !important;
+}
+
+html.text-scale-xl,
+.text-scale-xl {
+  font-size: 130% !important;
+}
+
+/* Dyslexia & Low-Vision Enhanced Spacing */
+html.dyslexia-friendly-mode,
+.dyslexia-friendly-mode {
+  letter-spacing: 0.04em !important;
+  word-spacing: 0.08em !important;
+  line-height: 1.85 !important;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Manual user reduced-motion toggle support */
+.user-reduced-motion *, .user-reduced-motion *::before, .user-reduced-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* High Contrast Mode - Robust, comprehensive WCAG AAA contrast overrides */
+html.high-contrast-mode,
+.high-contrast-mode {
+  --color-surface: #000000 !important;
+  --color-on-surface: #ffffff !important;
+  --color-on-surface-variant: #ffffff !important;
+  --color-primary: #ffd700 !important;
+  --color-secondary: #00ff66 !important;
+  --color-outline: #ffffff !important;
+  --color-surface-container: #111111 !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+.high-contrast-mode body {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Ensure all cards, sections, headers, and navbars switch to high-contrast dark or stark white-bordered blocks */
+.high-contrast-mode header,
+.high-contrast-mode nav,
+.high-contrast-mode main,
+.high-contrast-mode footer,
+.high-contrast-mode section {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+/* Content cards and white/off-white containers in high contrast */
+.high-contrast-mode [class*="bg-[#f7f9ff]"],
+.high-contrast-mode [class*="bg-[#eef4ff]"],
+.high-contrast-mode [class*="bg-[#e4effe]"],
+.high-contrast-mode [class*="bg-white"],
+.high-contrast-mode [class*="bg-slate-50"],
+.high-contrast-mode [class*="bg-slate-100"] {
+  background-color: #0a0a0a !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+/* Text elements in high contrast */
+.high-contrast-mode p,
+.high-contrast-mode span,
+.high-contrast-mode h1,
+.high-contrast-mode h2,
+.high-contrast-mode h3,
+.high-contrast-mode h4,
+.high-contrast-mode h5,
+.high-contrast-mode h6,
+.high-contrast-mode li,
+.high-contrast-mode label,
+.high-contrast-mode [class*="text-[#121c27]"],
+.high-contrast-mode [class*="text-[#41474f]"],
+.high-contrast-mode [class*="text-[#526070]"],
+.high-contrast-mode [class*="text-slate-"] {
+  color: #ffffff !important;
+}
+
+/* High contrast primary links and highlights */
+.high-contrast-mode [class*="text-[#004872]"],
+.high-contrast-mode [class*="text-[#0074b6]"] {
+  color: #ffd700 !important;
+}
+
+.high-contrast-mode [class*="text-[#366a1d]"] {
+  color: #55ff55 !important;
+}
+
+/* Buttons and interactive elements */
+.high-contrast-mode button,
+.high-contrast-mode a {
+  border-color: #ffffff !important;
+}
+
+.high-contrast-mode button:not([class*="bg-[#366a1d]"]):not([class*="bg-[#004872]"]):not([class*="bg-white"]) {
+  color: #ffffff !important;
+}
+
+/* Primary CTAs get bold yellow/black or high-contrast inverted styling */
+.high-contrast-mode [class*="bg-[#004872]"] {
+  background-color: #ffd700 !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+  border-color: #ffffff !important;
+}
+
+.high-contrast-mode [class*="bg-[#004872]"] * {
+  color: #000000 !important;
+}
+
+.high-contrast-mode [class*="bg-[#366a1d]"] {
+  background-color: #00ff66 !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+  border-color: #ffffff !important;
+}
+
+.high-contrast-mode [class*="bg-[#366a1d]"] * {
+  color: #000000 !important;
+}
+
+/* Borders and dividers */
+.high-contrast-mode * {
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.high-contrast-mode hr,
+.high-contrast-mode [class*="border-"] {
+  border-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Form inputs */
+.high-contrast-mode input,
+.high-contrast-mode select,
+.high-contrast-mode textarea {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+.high-contrast-mode input::placeholder,
+.high-contrast-mode textarea::placeholder {
+  color: #cccccc !important;
+}
+
+/* Focus styles for keyboard accessibility */
+:focus-visible {
+  outline: 3px solid #004872 !important;
+  outline-offset: 3px !important;
+}
+
+.high-contrast-mode :focus-visible {
+  outline: 3px solid #ffd700 !important;
+  outline-offset: 3px !important;
+}
+
+/* Skip to content link */
+.skip-to-content {
+  position: absolute;
+  top: -9999px;
+  left: 1rem;
+  z-index: 99999;
+  padding: 0.75rem 1.5rem;
+  background-color: #004872;
+  color: #ffffff;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transition: top 0.2s ease-in-out;
+}
+
+.skip-to-content:focus {
+  top: 1rem;
+}

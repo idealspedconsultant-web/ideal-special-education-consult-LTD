@@ -1,0 +1,100 @@
+{
+  "entities": {
+    "Booking": {
+      "title": "Booking",
+      "description": "Session booking with child information, service requested, and appointment details.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "fullName": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "phoneNumber": { "type": "string" },
+        "relationshipToLearner": { "type": "string" },
+        "serviceId": { "type": "string" },
+        "serviceTitle": { "type": "string" },
+        "preferredMode": { "type": "string" },
+        "preferredDate": { "type": "string" },
+        "preferredTime": { "type": "string" },
+        "childAge": { "type": "string" },
+        "childGender": { "type": "string" },
+        "primaryAreaOfConcern": { "type": "string" },
+        "previousDiagnosis": { "type": "string" },
+        "schoolOrClassroomContext": { "type": "string" },
+        "specificGoals": { "type": "string" },
+        "additionalNotes": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "fullName", "email", "phoneNumber", "serviceId", "serviceTitle"]
+    },
+    "Contact": {
+      "title": "Contact",
+      "description": "General enquiry or institutional partnership communication.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "fullName": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "phoneNumber": { "type": "string" },
+        "inquiryType": { "type": "string" },
+        "schoolOrOrganization": { "type": "string" },
+        "message": { "type": "string" },
+        "preferredContactMethod": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "fullName", "email", "message"]
+    },
+    "Donation": {
+      "title": "Donation",
+      "description": "Donation contribution in Nigerian Naira supporting special education.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "fullName": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "email": { "type": "string" },
+        "amount": { "type": "number" },
+        "currency": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "transactionRef": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "fullName", "amount", "currency"]
+    },
+    "EmailNotification": {
+      "title": "EmailNotification",
+      "description": "Outgoing email notification dispatched to the 3 designated staff mailboxes via Email4J.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "subject": { "type": "string" },
+        "category": { "type": "string" },
+        "status": { "type": "string" },
+        "referenceId": { "type": "string" },
+        "bodySnippet": { "type": "string" }
+      },
+      "required": ["id", "timestamp", "subject", "category", "status"]
+    }
+  },
+  "firestore": {
+    "/bookings/{bookingId}": {
+      "schema": { "$ref": "#/entities/Booking" },
+      "description": "Collection of session bookings"
+    },
+    "/contacts/{contactId}": {
+      "schema": { "$ref": "#/entities/Contact" },
+      "description": "Collection of contact inquiries"
+    },
+    "/donations/{donationId}": {
+      "schema": { "$ref": "#/entities/Donation" },
+      "description": "Collection of donations in Nigerian Naira"
+    },
+    "/email_notifications/{notificationId}": {
+      "schema": { "$ref": "#/entities/EmailNotification" },
+      "description": "Collection of Email4J notifications dispatched to staff"
+    }
+  }
+}

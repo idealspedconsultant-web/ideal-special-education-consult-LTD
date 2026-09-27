@@ -1,0 +1,9 @@
+# Robots.txt for Ideal Special Education Consult LTD
+# https://ais-pre-k5sywudf6ausba7zrytlou-342932672423.europe-west1.run.app
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://ais-pre-k5sywudf6ausba7zrytlou-342932672423.europe-west1.run.app/sitemap.xml
