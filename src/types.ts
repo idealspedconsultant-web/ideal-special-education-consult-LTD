@@ -1,3 +1,9 @@
+export interface AgeCategoryItem {
+  category: string;
+  ageRange: string;
+  focus: string;
+}
+
 export interface ServiceItem {
   id: string;
   title: string;
@@ -6,6 +12,7 @@ export interface ServiceItem {
   iconName: string;
   deliverables: string[];
   beneficiaries: string[];
+  ageCategories?: AgeCategoryItem[];
   ctaLabel: string;
 }
 

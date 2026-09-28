@@ -16,9 +16,15 @@ import {
   Heart,
   HelpCircle,
   CheckCircle2,
-  Users
+  Users,
+  Eye,
+  Ear,
+  Brain,
+  Baby,
+  Presentation
 } from 'lucide-react';
 import { ORGANISATION_INFO } from '../data/orgData';
+import { PastEventsSection } from './PastEventsSection';
 
 interface HomePageProps {
   onNavigate: (page: string) => void;
@@ -28,67 +34,77 @@ interface HomePageProps {
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   const [showCertificateModal, setShowCertificateModal] = useState(false);
 
-  // 4 Core Pillars (enticing summary without dumping 10 full services on the front page)
-  const corePillars = [
+  // 6 Primary Exploration Portals (giving visitors clean, attractive options to explore other pages)
+  const explorationPortals = [
     {
-      id: 'iep',
-      icon: <BookOpen className="w-6 h-6 text-[#004872]" />,
-      title: 'Individualized Education Programs (IEP)',
-      description: 'Comprehensive learner profiles, curriculum accommodations, and measurable developmental milestone tracking tailored to each child.',
-      actionLabel: 'Learn About IEP Services',
-      targetService: 'Individualized Support Plans (ISP) / IEP Development',
-    },
-    {
-      id: 'inclusion',
-      icon: <School className="w-6 h-6 text-[#366a1d]" />,
-      title: 'Inclusive School & Classroom Audits',
-      description: 'Institutional assessments evaluating physical accessibility, sensory accommodations, and inclusive pedagogical strategies for schools.',
-      actionLabel: 'Explore School Audits',
-      targetService: 'Inclusive School Environment Audits & Advisory',
-    },
-    {
-      id: 'deaf-access',
-      icon: <Users className="w-6 h-6 text-[#0074b6]" />,
-      title: 'Deaf Accessibility & Sign Language',
-      description: 'Specialized instruction in Nigerian Sign Language (NSL), British Sign Language (BSL), and American Sign Language (ASL) with certified interpreters.',
-      actionLabel: 'View Deaf Services',
-      targetService: 'Deaf Education & Sign Language Accessibility',
-    },
-    {
-      id: 'training',
-      icon: <Sparkles className="w-6 h-6 text-[#854d0e]" />,
-      title: 'Educator Training & Family Guidance',
-      description: 'Practical capacity-building workshops for teachers, and compassionate, empowering guidance for parents and families.',
-      actionLabel: 'Discover Educator Training',
-      targetService: 'Teacher & Staff Capacity Building (CPD)',
-    },
-  ];
-
-  // 3 Primary Exploration Pathways
-  const explorationPathways = [
-    {
-      page: 'services',
+      id: 'services',
       title: 'Our 10 Core Services',
-      badge: 'Comprehensive Offerings',
-      description: 'Explore our full spectrum of specialized solutions from diagnostic evaluations to assistive technology integration.',
+      badge: 'Full Spectrum Offerings',
+      description: 'Explore diagnostic evaluations, individual support plans (IEP/ISP), school inclusion audits, teacher training, and assistive technology.',
+      icon: <BookOpen className="w-6 h-6 text-[#004872]" />,
       cta: 'Explore All 10 Services',
       color: 'border-l-4 border-l-[#004872]',
+      page: 'services'
     },
     {
-      page: 'booking',
+      id: 'early-intervention',
+      title: 'Early Intervention Framework',
+      badge: 'Infants, Toddlers & Young Children',
+      description: 'Dedicated early childhood support featuring systematic progress monitoring, multi-disciplinary referrals, and individualized early plans.',
+      icon: <Baby className="w-6 h-6 text-[#2e7d32]" />,
+      cta: 'View Early Intervention',
+      color: 'border-l-4 border-l-[#2e7d32]',
+      page: 'early-intervention'
+    },
+    {
+      id: 'inclusive-expertise',
+      title: 'Inclusive Expertise & All Disabilities',
+      badge: 'Visual, Deaf & Neurodivergence',
+      description: 'Comprehensive accommodations for Visual Impairments & Low Vision, Deaf Education & Sign Language, Autism, ADHD, Dyslexia, and Physical Needs.',
+      icon: <Eye className="w-6 h-6 text-[#0074b6]" />,
+      cta: 'Explore Disability Domains',
+      color: 'border-l-4 border-l-[#0074b6]',
+      page: 'inclusive-expertise'
+    },
+    {
+      id: 'booking',
       title: 'Book a Consultation',
-      badge: 'Intake & Appointments',
-      description: 'Schedule an in-person consultation at our Ojo, Lagos clinic or request a secure virtual session nationwide and diaspora.',
+      badge: 'Clinical & Virtual Sessions',
+      description: 'Schedule an in-person intake assessment at our clinic opposite LASU in Ojo, Lagos, or request a secure virtual consultation nationwide.',
+      icon: <Calendar className="w-6 h-6 text-[#366a1d]" />,
       cta: 'Schedule an Appointment',
       color: 'border-l-4 border-l-[#366a1d]',
+      page: 'booking'
     },
     {
-      page: 'donate',
-      title: 'Support Inclusive Education',
-      badge: 'Donations & Sponsorship',
-      description: 'Partner with us to provide specialized educational resources and intervention for vulnerable and underserved learners.',
-      cta: 'Make a Contribution',
+      id: 'about',
+      title: 'About Us & Core Values',
+      badge: 'Our Mission & Story',
+      description: 'Learn about our foundational principles, educational rights commitment, leadership vision, and CAC corporate registration under CAMA 2020.',
+      icon: <Users className="w-6 h-6 text-[#854d0e]" />,
+      cta: 'Learn About Our Firm',
       color: 'border-l-4 border-l-[#854d0e]',
+      page: 'about'
+    },
+    {
+      id: 'past-events',
+      title: 'Events & Upcoming Programs',
+      badge: 'Slideshow & Upcoming Dates',
+      description: 'Browse our full-slide photo and video gallery of past programs, and register for upcoming educator workshops and child screening clinics.',
+      icon: <Presentation className="w-6 h-6 text-[#7c3aed]" />,
+      cta: 'View Events & Register',
+      color: 'border-l-4 border-l-[#7c3aed]',
+      page: 'past-events'
+    },
+    {
+      id: 'donate',
+      title: 'Support & Donations',
+      badge: 'Sponsorship & Outreach',
+      description: 'Partner with us to provide specialized learning aids, Braille materials, and diagnostic access for underserved learners with disabilities.',
+      icon: <Heart className="w-6 h-6 text-[#b91c1c]" />,
+      cta: 'Make a Contribution',
+      color: 'border-l-4 border-l-[#b91c1c]',
+      page: 'donate'
     },
   ];
 
@@ -96,7 +112,16 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     <div className="flex flex-col w-full bg-[#f7f9ff]">
       
       {/* =========================================================================
-          1. HERO SECTION: Clean, welcoming, uncluttered, enticing
+          1. EVENTS SHOWCASE & MEDIA SLIDES (Placed first on the website)
+          - Integrates upcoming & past programme slides
+          - 10-Second Auto-scroll with progress bar
+          - Next and Previous arrows directly on the display
+          - Managed via Authorized Access -> Programmes & Media tab
+          ========================================================================= */}
+      <PastEventsSection onNavigate={onNavigate} />
+
+      {/* =========================================================================
+          2. HERO SECTION: Clean, welcoming, uncluttered, enticing
           ========================================================================= */}
       <section 
         aria-label="Welcome to Ideal Special Education Consult LTD"
@@ -114,7 +139,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <span>{ORGANISATION_INFO.tagline}</span>
               </div>
 
-              {/* Main Headline with balanced wrap and Atkinson Hyperlegible */}
+              {/* Main Headline */}
               <h1 
                 className="font-headline text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#004872] leading-[1.18] tracking-tight"
                 style={{ textWrap: 'balance' }}
@@ -122,11 +147,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 Special Education &amp; Inclusion Consulting Tailored for Every Learner
               </h1>
 
-              {/* Concise Description */}
+              {/* Concise Supporting Description */}
               <p className="mt-5 text-base sm:text-lg text-[#334155] leading-relaxed max-w-2xl font-normal">
                 At <strong className="font-bold text-[#121c27]">Ideal Special Education Consult LTD</strong>, 
                 we advance educational equity and empower learners of all abilities. We partner with families, schools, 
-                and organizations to provide individualized support plans, diagnostic evaluations, and inclusive educational frameworks.
+                and organizations across Nigeria to provide individualized support plans, early intervention, and inclusive educational frameworks.
               </p>
 
               {/* Location & Quick Contact - High Contrast Uniform Text */}
@@ -173,7 +198,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               <div className="mt-8 pt-6 border-t border-[#e2e8f0] w-full grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs sm:text-sm text-[#334155]">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[#366a1d] shrink-0" />
-                  <span>Certified Consultants</span>
+                  <span>Certified Specialists</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[#366a1d] shrink-0" />
@@ -181,7 +206,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[#366a1d] shrink-0" />
-                  <span>Virtual &amp; In-Person</span>
+                  <span>Virtual &amp; In-Person (Ojo)</span>
                 </div>
               </div>
 
@@ -192,18 +217,18 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               <div className="relative w-full max-w-lg rounded-3xl overflow-hidden shadow-lg border border-[#dfe9f8] bg-slate-50">
                 <img
                   src="/inclusive-classroom.jpg"
-                  alt="Inclusive classroom environment with teacher and diverse learners"
+                  alt="Special education consultant working with diverse learners in an inclusive, accessible classroom"
                   className="w-full h-80 sm:h-96 object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#004872]/85 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#004872]/90 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
                   <span className="text-xs font-bold uppercase tracking-wider text-[#b3f092] mb-1">
-                    Learner-Centred Inclusion
+                    Whole-Learner Access
                   </span>
                   <h3 className="font-headline text-lg sm:text-xl font-bold leading-snug">
-                    Unlocking Every Child's Potential
+                    Unlocking Every Learner's Potential
                   </h3>
                   <p className="text-xs sm:text-sm text-white/90 mt-1">
-                    Specialized learning interventions tailored for neurodiverse students, sensory needs, and diverse abilities.
+                    Early intervention, visual accommodations, Deaf accessibility, sensory regulation, and adaptive curriculum support.
                   </p>
                 </div>
               </div>
@@ -214,10 +239,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       </section>
 
       {/* =========================================================================
-          2. CORE PILLARS OF SUPPORT: Enticing overview of primary focus areas
+          2. EXPLORATION PORTALS: Enticing, limited information inviting visitors to explore
           ========================================================================= */}
       <section 
-        aria-label="Core Pillars of Support"
+        aria-label="Explore Dedicated Pages and Portals"
         className="py-16 sm:py-20 bg-[#f7f9ff] border-b border-[#dfe9f8]"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -226,76 +251,66 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           <div className="text-center max-w-3xl mx-auto mb-12">
             <div className="flex items-center justify-center gap-1.5 text-xs sm:text-sm font-bold text-[#366a1d] uppercase tracking-wider mb-2">
               <Sparkles className="w-4 h-4 text-[#366a1d]" />
-              <span>Areas of Practice</span>
+              <span>Explore Our Practice</span>
             </div>
             <h2 
               className="font-headline text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#004872] tracking-tight"
               style={{ textWrap: 'balance' }}
             >
-              How We Support Learners, Families &amp; Schools
+              Explore Our Dedicated Portals &amp; Expertise
             </h2>
             <p className="mt-3 text-base sm:text-lg text-[#334155] leading-relaxed">
-              We provide structured, research-backed support designed to break down barriers and promote unconditional belonging.
+              Select a dedicated portal below to discover our specialized frameworks, review age-specific interventions, or book an appointment.
             </p>
           </div>
 
-          {/* 4 Pillar Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            {corePillars.map((pillar) => (
+          {/* 6 Portal Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {explorationPortals.map((portal) => (
               <motion.div
-                key={pillar.id}
+                key={portal.id}
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.2 }}
-                className="bg-white rounded-2xl p-6 sm:p-8 border border-[#dfe9f8] shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
+                className={`bg-white rounded-3xl p-6 sm:p-7 border border-[#dfe9f8] shadow-xs hover:shadow-md transition-all flex flex-col justify-between ${portal.color}`}
               >
                 <div>
-                  <div className="w-12 h-12 rounded-xl bg-[#f0f4fa] flex items-center justify-center mb-5">
-                    {pillar.icon}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-12 h-12 rounded-2xl bg-[#f0f4fa] flex items-center justify-center">
+                      {portal.icon}
+                    </div>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">
+                      {portal.badge}
+                    </span>
                   </div>
-                  <h3 className="font-headline text-xl sm:text-2xl font-bold text-[#004872] mb-3">
-                    {pillar.title}
+
+                  <h3 className="font-headline text-xl font-bold text-[#004872] mb-2.5">
+                    {portal.title}
                   </h3>
-                  <p className="text-base text-[#334155] leading-relaxed font-normal">
-                    {pillar.description}
+
+                  <p className="text-sm sm:text-base text-[#334155] leading-relaxed font-normal">
+                    {portal.description}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-5 border-t border-[#f1f5f9]">
+                <div className="mt-6 pt-4 border-t border-slate-100">
                   <button
                     type="button"
-                    onClick={() => onNavigate('services')}
-                    className="inline-flex items-center gap-2 text-sm font-bold text-[#004872] hover:text-[#0074b6] transition-colors cursor-pointer group"
+                    onClick={() => onNavigate(portal.page)}
+                    className="w-full py-2.5 px-4 rounded-xl text-sm font-bold text-[#004872] bg-[#f0f4fa] hover:bg-[#e2eaf5] transition-colors cursor-pointer flex items-center justify-between group"
                   >
-                    <span>{pillar.actionLabel}</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <span>{portal.cta}</span>
+                    <ArrowRight className="w-4 h-4 text-[#004872] group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
               </motion.div>
             ))}
           </div>
 
-          {/* Central CTA to View All Services */}
-          <div className="mt-12 text-center">
-            <motion.button
-              type="button"
-              onClick={() => onNavigate('services')}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-base font-bold text-white bg-[#004872] hover:bg-[#1b6091] shadow-xs transition-colors cursor-pointer"
-            >
-              <span>Explore All 10 Special Education Services</span>
-              <ArrowRight className="w-4 h-4" />
-            </motion.button>
-            <p className="text-sm text-[#475569] mt-2.5">
-              Review diagnostic testing, early intervention, Deaf accessibility, and school audits on our dedicated Services page.
-            </p>
-          </div>
-
         </div>
       </section>
 
       {/* =========================================================================
-          3. CORPORATE TRUST & CAC REGISTRATION: Clear legal mandate with Certificate
+          3. CORPORATE TRUST & CAC REGISTRATION: Strictly RC 9820096 (TIN Removed)
           ========================================================================= */}
       <section 
         aria-label="Official Corporate Registration and Accreditation"
@@ -316,7 +331,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   Ideal Special Education Consult LTD
                 </h3>
                 <p className="text-sm text-white/85 mt-1 max-w-xl leading-relaxed">
-                  Incorporated under the Companies and Allied Matters Act 2020. Registration Number: <strong>RC 9820096</strong> · TIN: <strong>2622469536287</strong>.
+                  Incorporated under the Companies and Allied Matters Act 2020. Registration Number: <strong>RC 9820096</strong>.
                 </p>
               </div>
             </div>
@@ -340,71 +355,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       </section>
 
       {/* =========================================================================
-          4. EXPLORATION PATHWAYS: Options for visitors to explore dedicated pages
-          ========================================================================= */}
-      <section 
-        aria-label="Explore Dedicated Pages"
-        className="py-16 sm:py-20 bg-[#f7f9ff] border-b border-[#dfe9f8]"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 
-              className="font-headline text-2xl sm:text-3xl font-extrabold text-[#004872] tracking-tight"
-              style={{ textWrap: 'balance' }}
-            >
-              Explore Our Dedicated Portals
-            </h2>
-            <p className="mt-2 text-base text-[#334155]">
-              Select a section to learn more, schedule an appointment, or make an impact.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {explorationPathways.map((path) => (
-              <motion.div
-                key={path.page}
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.2 }}
-                className={`bg-white rounded-2xl p-6 sm:p-7 border border-[#dfe9f8] shadow-xs flex flex-col justify-between ${path.color}`}
-              >
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-2">
-                    {path.badge}
-                  </span>
-                  <h3 className="font-headline text-xl font-bold text-[#004872] mb-2">
-                    {path.title}
-                  </h3>
-                  <p className="text-sm sm:text-base text-[#334155] leading-relaxed">
-                    {path.description}
-                  </p>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-slate-100">
-                  <motion.button
-                    type="button"
-                    onClick={() => onNavigate(path.page)}
-                    whileHover={{ x: 2 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full py-2.5 px-4 rounded-xl text-sm font-bold text-[#004872] bg-[#f0f4fa] hover:bg-[#e2eaf5] transition-colors cursor-pointer flex items-center justify-between"
-                  >
-                    <span>{path.cta}</span>
-                    <ArrowRight className="w-4 h-4 text-[#004872]" />
-                  </motion.button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* =========================================================================
-          5. CALL TO ACTION & ASSISTANCE: Friendly closure inviting dialogue
+          4. CALL TO ACTION & ASSISTANCE: Friendly closure inviting dialogue
           ========================================================================= */}
       <section 
         aria-label="Connect With Our Special Education Team"
-        className="py-14 sm:py-16 bg-white border-b border-[#dfe9f8]"
+        className="py-14 sm:py-16 bg-[#f7f9ff] border-b border-[#dfe9f8]"
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <div className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#366a1d] uppercase tracking-wider mb-3">
@@ -418,7 +373,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             We Are Here to Listen, Guide, and Support
           </h2>
           <p className="mt-3 text-base sm:text-lg text-[#334155] leading-relaxed max-w-2xl mx-auto">
-            Whether you need a confidential diagnostic evaluation, guidance on classroom accommodations, or sign language support, our consultants are ready to assist.
+            Whether you need early intervention for an infant, visual or hearing accommodations, or guidance on classroom inclusion, our consultants are ready to assist.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
@@ -458,7 +413,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       </section>
 
       {/* =========================================================================
-          CAC CERTIFICATE OF INCORPORATION MODAL (Clean, no download/print)
+          CAC CERTIFICATE OF INCORPORATION MODAL (Strictly RC 9820096)
           ========================================================================= */}
       <AnimatePresence>
         {showCertificateModal && (
@@ -508,7 +463,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <div className="relative rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 shadow-inner flex items-center justify-center p-2 sm:p-3">
                   <img
                     src="/certificate-cac.jpg"
-                    alt="Certificate of Incorporation for Ideal Special Education Consult Ltd - RC 9820096, Tax Identification Number 2622469536287"
+                    alt="Certificate of Incorporation for Ideal Special Education Consult Ltd - RC 9820096"
                     referrerPolicy="no-referrer"
                     className="w-full h-auto max-h-[58vh] object-contain rounded-xl shadow-xs"
                     loading="eager"
@@ -520,7 +475,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 </div>
               </div>
 
-              {/* Verified Corporate Information Grid */}
+              {/* Verified Corporate Information Grid (Strictly RC 9820096) */}
               <div className="bg-[#f7f9ff] rounded-2xl p-4 border border-[#e4effe] mb-4 text-xs space-y-2">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pb-2 border-b border-[#dfe9f8]">
                   <div>
@@ -533,19 +488,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
-                  <div>
-                    <span className="text-slate-500 block text-[10px] uppercase font-bold">Tax Identification Number (TIN)</span>
-                    <strong className="text-slate-800 font-mono text-xs font-semibold">2622469536287</strong>
-                  </div>
+                <div className="pt-1">
                   <div>
                     <span className="text-slate-500 block text-[10px] uppercase font-bold">Statute &amp; Jurisdiction</span>
-                    <span className="text-slate-700 text-xs">Companies &amp; Allied Matters Act 2020</span>
+                    <span className="text-slate-700 text-xs">Companies &amp; Allied Matters Act 2020 • Federal Republic of Nigeria</span>
                   </div>
                 </div>
               </div>
 
-              {/* Modal Footer (Clean, no download/print buttons) */}
+              {/* Modal Footer */}
               <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
                 <a
                   href="/certificate-cac.jpg"

@@ -52,16 +52,39 @@ export const SERVICES_LIST: ServiceItem[] = [
   {
     id: 'early-intervention',
     title: 'Early Intervention',
-    shortDescription: 'Timely identification, developmental stimulation, and sensory support for toddlers and young children during foundational years.',
-    fullDescription: 'Early Intervention focuses on the critical window of developmental plasticity from infancy to early primary. We evaluate developmental milestones, design play-based cognitive stimulation programs, and equip parents and preschool educators with early therapeutic strategies that mitigate long-term learning bottlenecks.',
+    shortDescription: 'Comprehensive developmental screening, individualized early intervention plans, progress monitoring, and multidisciplinary referrals for infants, toddlers, and young children.',
+    fullDescription: 'Our Early Intervention services provide essential foundational support during the critical early years of child development. We evaluate developmental milestones, design individualized early intervention plans, conduct continuous progress monitoring and structured follow-up, and coordinate timely referrals to other specialized professionals when necessary, ensuring holistic, evidence-based care for infants, toddlers, and young children across all abilities.',
     iconName: 'Sparkles',
     deliverables: [
-      'Developmental milestone tracking & baseline screening',
-      'Play-based sensory & motor integration activities',
-      'Home-based early stimulation routines for parents',
-      'Early communication and socio-emotional readiness'
+      'Individualized early intervention plans tailored to each child’s unique developmental profile',
+      'Continuous progress monitoring and structured follow-up evaluations',
+      'Timely referral to other medical, clinical, and allied professionals when necessary (e.g. pediatricians, ophthalmologists, audiologists, SLPs, OTs)',
+      'Developmental milestone tracking & baseline screening for infants, toddlers, and young children',
+      'Play-based sensory-motor stimulation and home routines empowering parents and caregivers'
     ],
-    beneficiaries: ['Infants & Toddlers (Ages 0–6)', 'Preschool Educators', 'Parents & Primary Caregivers'],
+    beneficiaries: [
+      'Infants (Birth to 12 Months)',
+      'Toddlers (Ages 1 to 3 Years)',
+      'Young Children (Ages 3 to 6+ Years)',
+      'Parents, Primary Caregivers & Preschool Educators'
+    ],
+    ageCategories: [
+      { 
+        category: 'Infants', 
+        ageRange: 'Birth – 12 Months', 
+        focus: 'Early sensory responses, visual tracking, motor reflexes, developmental milestones & responsive parental bonding.' 
+      },
+      { 
+        category: 'Toddlers', 
+        ageRange: '1 – 3 Years', 
+        focus: 'Emerging speech and communication, gross & fine motor coordination, play-based sensory exploration & behavioral foundations.' 
+      },
+      { 
+        category: 'Young Children', 
+        ageRange: '3 – 6+ Years', 
+        focus: 'School readiness, foundational cognitive concepts, social-emotional development & individualized early intervention plans.' 
+      }
+    ],
     ctaLabel: 'Request Early Intervention Support'
   },
   {
@@ -185,19 +208,76 @@ export const SERVICES_LIST: ServiceItem[] = [
     ctaLabel: 'Develop an ISP'
   },
   {
-    id: 'deaf-inclusion-and-accessibility',
-    title: 'Deaf Inclusion and Accessibility',
-    shortDescription: 'Multi-system sign language facilitation (NSL, BSL, ASL), visual learning adaptations, captioning guidance, and inclusive environments for Deaf and hard-of-hearing learners.',
-    fullDescription: 'True inclusion ensures total communication access. We champion Deaf and Hard-of-Hearing learners through multi-system sign language training (Nigerian Sign Language, British Sign Language, and American Sign Language), visual spatial classroom orientation, visual timetable integration, accredited interpreter coordination, and acoustic environmental adjustments.',
-    iconName: 'Ear',
+    id: 'sensory-and-disability-accessibility',
+    title: 'Visual Impairment, Deaf Accessibility & Assistive Support',
+    shortDescription: 'Comprehensive accommodations for visual impairments (Braille, low-vision aids), Deaf accessibility (NSL, BSL, ASL), and assistive technologies for diverse disabilities.',
+    fullDescription: 'We champion holistic accessibility across sensory and physical needs. For visually impaired and low-vision learners, we provide Braille instruction, large-print modifications, orientation & mobility (O&M) guidance, and assistive optical/digital accommodations. For Deaf and hard-of-hearing learners, we coordinate multi-system sign language instruction (Nigerian Sign Language, British Sign Language, American Sign Language) and acoustic adaptations. We also design assistive solutions for learners with motor and multiple disabilities.',
+    iconName: 'Eye',
     deliverables: [
-      'Sign language training & sensitization (NSL, BSL & ASL) for schools & families',
-      'Curriculum-aligned sign support for Nigerian National (WAEC/JAMB), British (Cambridge/IGCSE), and American schools',
-      'Visual learning strategies & bilingual-bicultural literacy support',
-      'Deaf-friendly classroom lighting & acoustic recommendations to dampen generator/fan noise',
-      'Accredited examination and assembly sign language interpreting'
+      'Visual impairment accommodations: Braille transcription, tactile learning aids, large-print materials & lighting optimization',
+      'Orientation & Mobility (O&M) training for independent, confident school and community navigation',
+      'Sign language facilitation & interpreter coordination (NSL, BSL, and ASL) for academic and social inclusion',
+      'Bilingual-bicultural literacy strategies & visual communication schedules',
+      'Assistive technology integration for visual, auditory, motor, and speech communication needs',
+      'Classroom environmental audits: acoustic management, anti-glare measures, and universal physical access'
     ],
-    beneficiaries: ['Deaf & Hard-of-Hearing Learners', 'Hearing Families of Deaf Children', 'Inclusive Schools (National & International)'],
-    ctaLabel: 'Explore Deaf Inclusion Services'
+    beneficiaries: [
+      'Visually Impaired & Low-Vision Learners',
+      'Deaf & Hard-of-Hearing Learners',
+      'Learners with Physical & Multiple Disabilities',
+      'Families & Inclusive Educational Institutions'
+    ],
+    ctaLabel: 'Explore Accessibility Services'
+  }
+];
+
+export const DISABILITIES_SUPPORTED = [
+  {
+    id: 'visual-impairments',
+    title: 'Visual Impairments & Low Vision',
+    icon: 'Eye',
+    summary: 'From low vision and photophobia to total blindness, we design tailored optical, tactile, and environmental learning solutions.',
+    examples: ['Low Vision & Partial Sight', 'Total Blindness', 'Cerebral Visual Impairment (CVI)', 'Albinism-Related Vision Needs', 'Visual Field Deficits'],
+    interventions: ['Braille Instruction & Transcription', 'Large Print & High-Contrast Formatting', 'Tactile Diagrams & Manipulatives', 'Orientation & Mobility (O&M)', 'Screen Readers & Digital Assistive Tech']
+  },
+  {
+    id: 'deaf-hearing',
+    title: 'Deaf & Hard of Hearing',
+    icon: 'Ear',
+    summary: 'Total communication access integrating multi-system sign language, bilingual literacy, and acoustic classroom optimization.',
+    examples: ['Deafness', 'Hard of Hearing', 'Auditory Neuropathy', 'Unilateral / Bilateral Hearing Loss'],
+    interventions: ['Nigerian Sign Language (NSL)', 'British Sign Language (BSL)', 'American Sign Language (ASL)', 'Visual Timetables & Cues', 'Classroom Acoustic & Lighting Adjustments']
+  },
+  {
+    id: 'neurodivergence',
+    title: 'Autism & Attention Differences (ADHD)',
+    icon: 'Puzzle',
+    summary: 'Strength-based, neurodiversity-affirming frameworks focusing on sensory regulation, executive functioning, and communication.',
+    examples: ['Autism Spectrum Disorder (ASD)', 'ADHD (Inattentive, Hyperactive, Combined)', 'Executive Function Challenges'],
+    interventions: ['Sensory-Friendly Classroom Design', 'Visual Schedules & Social Stories', 'Movement Breaks & Fidget Tools', 'Structured Predictable Routines']
+  },
+  {
+    id: 'learning-differences',
+    title: 'Specific Learning Difficulties (SpLD)',
+    icon: 'BookOpen',
+    summary: 'Multisensory evidence-based remediation targeting literacy, numeracy, and cognitive processing variations.',
+    examples: ['Dyslexia (Reading & Decoding)', 'Dyscalculia (Math & Numbers)', 'Dysgraphia (Writing & Fine Motor)', 'Working Memory Differences'],
+    interventions: ['Orton-Gillingham Multisensory Phonics', 'Concrete-to-Abstract Math Support', 'Text-to-Speech & Speech-to-Text', 'Extended Testing Time Accommodations']
+  },
+  {
+    id: 'physical-motor',
+    title: 'Physical & Motor Disabilities',
+    icon: 'Activity',
+    summary: 'Promoting independent participation and physical inclusion across schools and community spaces.',
+    examples: ['Cerebral Palsy', 'Mobility & Wheelchair Needs', 'Dyspraxia (Developmental Coordination Disorder)', 'Fine & Gross Motor Delays'],
+    interventions: ['Physical Accessibility & Ramp Audits', 'Ergonomic Seating & Postural Support', 'Adapted Writing Tools & Grips', 'Assistive Switch & Tech Input']
+  },
+  {
+    id: 'developmental-speech',
+    title: 'Speech, Language & Developmental Delays',
+    icon: 'Heart',
+    summary: 'Facilitating functional communication, life skills, and developmental milestone achievement.',
+    examples: ['Speech & Language Delays', 'Down Syndrome', 'Global Developmental Delay (GDD)', 'Intellectual Disabilities'],
+    interventions: ['Augmentative & Alternative Communication (AAC)', 'Functional Life Skills Training', 'Allied Health Referral Coordination', 'Step-by-Step Task Analysis']
   }
 ];

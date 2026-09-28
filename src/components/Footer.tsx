@@ -87,7 +87,7 @@ export const Footer: React.FC<FooterProps> = ({
               Navigation
             </h4>
             <ul className="space-y-2 text-xs sm:text-sm text-white/80">
-              {['home', 'about', 'services', 'booking', 'donate', 'faq', 'contact'].map((id) => (
+              {['home', 'services', 'early-intervention', 'inclusive-expertise', 'past-events', 'about', 'booking', 'donate', 'faq', 'contact'].map((id) => (
                 <li key={id}>
                   <motion.button
                     type="button"
@@ -96,7 +96,19 @@ export const Footer: React.FC<FooterProps> = ({
                     whileTap={{ scale: 0.96 }}
                     className="hover:underline capitalize text-left cursor-pointer transition-colors block text-sm"
                   >
-                    {id === 'home' ? 'Home' : id === 'services' ? 'Our Services' : id === 'faq' ? 'FAQ' : id.replace('-', ' ')}
+                    {id === 'home' 
+                      ? 'Home' 
+                      : id === 'services' 
+                      ? 'Our Services' 
+                      : id === 'early-intervention'
+                      ? 'Early Intervention'
+                      : id === 'inclusive-expertise'
+                      ? 'Inclusive Expertise'
+                      : id === 'past-events'
+                      ? 'Events & Programs'
+                      : id === 'faq' 
+                      ? 'FAQ' 
+                      : id.replace('-', ' ')}
                   </motion.button>
                 </li>
               ))}

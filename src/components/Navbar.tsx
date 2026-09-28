@@ -48,8 +48,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   const navLinks = [
     { id: 'home', label: 'Home' },
     { id: 'services', label: 'Our Services' },
+    { id: 'early-intervention', label: 'Early Intervention' },
+    { id: 'inclusive-expertise', label: 'Inclusive Expertise' },
+    { id: 'past-events', label: 'Events & Programs' },
     { id: 'about', label: 'About Us' },
-    { id: 'faq', label: 'FAQ' },
     { id: 'contact', label: 'Contact' },
   ];
 
@@ -245,7 +247,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </motion.button>
 
         {/* Clean Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1.5 lg:gap-3" aria-label="Main Navigation">
+        <nav className="hidden lg:flex items-center gap-1 xl:gap-2" aria-label="Main Navigation">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
             return (
@@ -256,7 +258,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={() => handleNavClick(link.id)}
                 whileHover={{ y: -1 }}
                 whileTap={{ scale: 0.96 }}
-                className={`relative px-3.5 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
+                className={`relative px-2.5 xl:px-3 py-1.5 rounded-lg text-xs xl:text-sm font-semibold transition-all cursor-pointer whitespace-nowrap ${
                   isActive
                     ? 'text-[#004872] bg-[#e4effe]'
                     : 'text-[#41474f] hover:text-[#004872] hover:bg-white/80'
@@ -275,20 +277,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           })}
         </nav>
 
-        {/* Action CTAs: Limited to 2 essential buttons + Intro Sparkle */}
+        {/* Action CTAs: Essential Donate and Booking buttons */}
         <div className="hidden sm:flex items-center gap-3 shrink-0">
-          {/* Replay Brand Intro Sparkle button */}
-          <motion.button
-            type="button"
-            onClick={onReplayLoading}
-            whileHover={{ scale: 1.1, rotate: 15 }}
-            whileTap={{ scale: 0.9 }}
-            className="p-2 text-[#004872] hover:bg-[#e4effe] rounded-lg border border-[#c1c7d0] transition-colors cursor-pointer"
-            title="Play Brand Loading Animation"
-            aria-label="Play Brand Loading Animation"
-          >
-            <Sparkles className="w-4 h-4 text-[#0074b6]" />
-          </motion.button>
 
           {/* Donate Pill */}
           <motion.button

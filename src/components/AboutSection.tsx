@@ -281,7 +281,7 @@ export const AboutSection: React.FC = () => {
                   <div className="relative rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 shadow-inner flex items-center justify-center p-2 sm:p-3">
                     <img
                       src="/certificate-cac.jpg"
-                      alt="Certificate of Incorporation for Ideal Special Education Consult Ltd - RC 9820096, Tax Identification Number 2622469536287"
+                      alt="Certificate of Incorporation for Ideal Special Education Consult Ltd - RC 9820096"
                       referrerPolicy="no-referrer"
                       className="w-full h-auto max-h-[58vh] object-contain rounded-xl shadow-xs"
                       loading="eager"
@@ -309,8 +309,8 @@ export const AboutSection: React.FC = () => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                     <div>
-                      <span className="text-slate-500 block text-[10px] uppercase font-bold">Tax Identification Number (TIN)</span>
-                      <strong className="text-slate-800 font-mono text-xs font-semibold">2622469536287</strong>
+                      <span className="text-slate-500 block text-[10px] uppercase font-bold">Issuing Authority</span>
+                      <strong className="text-slate-800 text-xs font-semibold">Corporate Affairs Commission (CAC), Abuja</strong>
                     </div>
                     <div>
                       <span className="text-slate-500 block text-[10px] uppercase font-bold">Statute &amp; Jurisdiction</span>

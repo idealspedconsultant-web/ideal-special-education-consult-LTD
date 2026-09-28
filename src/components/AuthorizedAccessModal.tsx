@@ -27,7 +27,8 @@ import {
   FileText,
   HelpCircle,
   Sparkles,
-  Info
+  Info,
+  Film
 } from 'lucide-react';
 import { IdealLogo } from './IdealLogo';
 import {
@@ -39,6 +40,7 @@ import {
   EmailServiceStatus,
 } from '../types';
 import { Email4JMailboxTab } from './Email4JMailboxTab';
+import { ProgrammesManagerTab } from './ProgrammesManagerTab';
 
 interface AuthorizedAccessModalProps {
   isOpen: boolean;
@@ -72,7 +74,7 @@ export const AuthorizedAccessModal: React.FC<AuthorizedAccessModalProps> = ({ is
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
   // Submissions data state
-  const [activeTab, setActiveTab] = useState<'assessments' | 'contacts' | 'donations' | 'emails' | 'export' | 'audit'>('assessments');
+  const [activeTab, setActiveTab] = useState<'assessments' | 'contacts' | 'donations' | 'emails' | 'programmes' | 'export' | 'audit'>('assessments');
   const [auditSubTab, setAuditSubTab] = useState<'assumptions' | 'clarifications' | 'future' | 'checklist'>('assumptions');
   const [bookings, setBookings] = useState<BookingSubmission[]>([]);
   const [contacts, setContacts] = useState<ContactSubmission[]>([]);
@@ -582,6 +584,21 @@ export const AuthorizedAccessModal: React.FC<AuthorizedAccessModalProps> = ({ is
               </button>
 
               <button
+                onClick={() => setActiveTab('programmes')}
+                className={`py-3 px-3 text-xs sm:text-sm font-bold border-b-2 flex items-center gap-2 whitespace-nowrap transition-colors cursor-pointer ${
+                  activeTab === 'programmes'
+                    ? 'border-[#004872] text-[#004872] bg-white'
+                    : 'border-transparent text-slate-500 hover:text-slate-800'
+                }`}
+              >
+                <Film className="w-4 h-4 text-[#7c3aed]" />
+                <span className="font-bold">Programmes &amp; Media</span>
+                <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-purple-50 text-purple-700 font-bold border border-purple-200">
+                  Live Deck
+                </span>
+              </button>
+
+              <button
                 onClick={() => setActiveTab('export')}
                 className={`py-3 px-3 text-xs sm:text-sm font-bold border-b-2 flex items-center gap-2 whitespace-nowrap transition-colors cursor-pointer ${
                   activeTab === 'export'
@@ -883,6 +900,11 @@ export const AuthorizedAccessModal: React.FC<AuthorizedAccessModalProps> = ({ is
                   isLoading={isLoadingData}
                   userEmail={session.email}
                 />
+              )}
+
+              {/* TAB: PROGRAMMES & MEDIA MANAGER (Upcoming & Previous Program Control) */}
+              {activeTab === 'programmes' && (
+                <ProgrammesManagerTab />
               )}
 
               {/* TAB 4: EXPORT & PRINT */}

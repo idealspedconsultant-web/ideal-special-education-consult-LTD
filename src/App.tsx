@@ -7,6 +7,8 @@ import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { BrandLoadingScreen, BrandLazyLoader } from './components/BrandLoadingScreen';
 import { Navbar } from './components/Navbar';
 import { HomePage } from './components/HomePage';
+import { EarlyInterventionPage } from './components/EarlyInterventionPage';
+import { InclusiveExpertisePage } from './components/InclusiveExpertisePage';
 import { AboutSection } from './components/AboutSection';
 import { ServicesSection } from './components/ServicesSection';
 import { BookingSection } from './components/BookingSection';
@@ -16,13 +18,24 @@ import { FAQSection } from './components/FAQSection';
 import { Footer } from './components/Footer';
 import { BackToTop } from './components/BackToTop';
 import { ChevronRight, Home as HomeIcon } from 'lucide-react';
+import { PastEventsSection } from './components/PastEventsSection';
 
 // Lazy-loaded modals using branded lazy loading fallback
 const AuthorizedAccessModal = lazy(() => 
   import('./components/AuthorizedAccessModal').then(module => ({ default: module.AuthorizedAccessModal }))
 );
 
-export type PageId = 'home' | 'about' | 'services' | 'booking' | 'donate' | 'faq' | 'contact';
+export type PageId = 
+  | 'home' 
+  | 'early-intervention' 
+  | 'inclusive-expertise' 
+  | 'past-events'
+  | 'services' 
+  | 'about' 
+  | 'booking' 
+  | 'donate' 
+  | 'faq' 
+  | 'contact';
 
 export default function App() {
   const [showLoadingScreen, setShowLoadingScreen] = useState(true);
@@ -37,11 +50,24 @@ export default function App() {
   // Modals state
   const [authorizedAccessOpen, setAuthorizedAccessOpen] = useState(false);
   
+  const validPages: PageId[] = [
+    'home', 
+    'early-intervention', 
+    'inclusive-expertise', 
+    'past-events',
+    'services', 
+    'about', 
+    'booking', 
+    'donate', 
+    'faq', 
+    'contact'
+  ];
+
   // Hash & History synchronization for browser back/forward and direct bookmarks
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '').toLowerCase();
-      if (['home', 'about', 'services', 'booking', 'donate', 'faq', 'contact'].includes(hash)) {
+      if (validPages.includes(hash as PageId)) {
         setCurrentPage(hash as PageId);
       } else if (hash === 'hero') {
         setCurrentPage('home');
@@ -73,7 +99,7 @@ export default function App() {
   // Page navigation handler
   const handleNavigate = (pageId: string) => {
     const target = pageId === 'hero' ? 'home' : pageId;
-    if (['home', 'about', 'services', 'booking', 'donate', 'faq', 'contact'].includes(target)) {
+    if (validPages.includes(target as PageId)) {
       setCurrentPage(target as PageId);
       window.location.hash = target;
       window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
@@ -81,8 +107,10 @@ export default function App() {
   };
 
   // Pre-select service and navigate to dedicated booking page
-  const handleSelectServiceToBook = (serviceTitle: string) => {
-    setPreselectedService(serviceTitle);
+  const handleSelectServiceToBook = (serviceTitle?: string) => {
+    if (serviceTitle) {
+      setPreselectedService(serviceTitle);
+    }
     handleNavigate('booking');
   };
 
@@ -120,12 +148,12 @@ export default function App() {
 
       {/* =========================================================================
           MAIN CONTENT: Dedicated Pages Architecture
-          The front page is calm and enticing; other services, booking, and donations
-          are situated on their own dedicated pages.
+          Calm Front Page + Dedicated Subpages for Early Intervention,
+          Inclusive Expertise, Services, Booking, About, Donation, FAQ, and Contact.
           ========================================================================= */}
       <main id="main-content" className="flex-1 focus:outline-none" tabIndex={-1}>
         
-        {/* 1. FRONT PAGE: Calm, Enticing, Highlights & Exploration Pathways */}
+        {/* 1. FRONT PAGE: Calm, Enticing, Exploration Portals */}
         {currentPage === 'home' && (
           <HomePage
             onNavigate={handleNavigate}
@@ -133,10 +161,129 @@ export default function App() {
           />
         )}
 
-        {/* 2. OUR SERVICES PAGE: Dedicated 10 Core Services with Category Filters */}
+        {/* 2. DEDICATED EARLY INTERVENTION PAGE */}
+        {currentPage === 'early-intervention' && (
+          <div>
+            <nav aria-label="Breadcrumb" className="bg-[#eef4ff] border-b border-[#dfe9f8] py-4 px-4 sm:px-8">
+              <div className="max-w-7xl mx-auto flex items-center justify-between text-sm sm:text-base">
+                <ol className="flex items-center gap-2 text-[#334155]">
+                  <li>
+                    <button 
+                      type="button" 
+                      onClick={() => handleNavigate('home')} 
+                      className="hover:text-[#004872] hover:underline font-semibold cursor-pointer flex items-center gap-1"
+                    >
+                      <HomeIcon className="w-4 h-4" />
+                      <span>Home</span>
+                    </button>
+                  </li>
+                  <li aria-hidden="true">
+                    <ChevronRight className="w-4 h-4 text-slate-400" />
+                  </li>
+                  <li>
+                    <span className="font-bold text-[#004872]" aria-current="page">Early Intervention Framework</span>
+                  </li>
+                </ol>
+
+                <button
+                  type="button"
+                  onClick={() => handleSelectServiceToBook('Early Intervention Support & Developmental Screening')}
+                  className="hidden sm:inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-white bg-[#004872] px-4 py-2 rounded-xl hover:bg-[#1b6091] transition-colors cursor-pointer shadow-2xs"
+                >
+                  Book Early Assessment →
+                </button>
+              </div>
+            </nav>
+
+            <EarlyInterventionPage
+              onNavigate={handleNavigate}
+              onBookSession={handleSelectServiceToBook}
+            />
+          </div>
+        )}
+
+        {/* 3. DEDICATED INCLUSIVE EXPERTISE PAGE (All Disabilities) */}
+        {currentPage === 'inclusive-expertise' && (
+          <div>
+            <nav aria-label="Breadcrumb" className="bg-[#eef4ff] border-b border-[#dfe9f8] py-4 px-4 sm:px-8">
+              <div className="max-w-7xl mx-auto flex items-center justify-between text-sm sm:text-base">
+                <ol className="flex items-center gap-2 text-[#334155]">
+                  <li>
+                    <button 
+                      type="button" 
+                      onClick={() => handleNavigate('home')} 
+                      className="hover:text-[#004872] hover:underline font-semibold cursor-pointer flex items-center gap-1"
+                    >
+                      <HomeIcon className="w-4 h-4" />
+                      <span>Home</span>
+                    </button>
+                  </li>
+                  <li aria-hidden="true">
+                    <ChevronRight className="w-4 h-4 text-slate-400" />
+                  </li>
+                  <li>
+                    <span className="font-bold text-[#004872]" aria-current="page">Inclusive Expertise Across Disabilities</span>
+                  </li>
+                </ol>
+
+                <button
+                  type="button"
+                  onClick={() => handleNavigate('booking')}
+                  className="hidden sm:inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-white bg-[#004872] px-4 py-2 rounded-xl hover:bg-[#1b6091] transition-colors cursor-pointer shadow-2xs"
+                >
+                  Book Specialist Session →
+                </button>
+              </div>
+            </nav>
+
+            <InclusiveExpertisePage
+              onNavigate={handleNavigate}
+              onBookSession={handleSelectServiceToBook}
+            />
+          </div>
+        )}
+
+        {/* 4. PAST EVENTS, TALKS & PROGRAMS PAGE: Slideshow & Archive */}
+        {currentPage === 'past-events' && (
+          <div>
+            <nav aria-label="Breadcrumb" className="bg-[#eef4ff] border-b border-[#dfe9f8] py-4 px-4 sm:px-8">
+              <div className="max-w-7xl mx-auto flex items-center justify-between text-sm sm:text-base">
+                <ol className="flex items-center gap-2 text-[#334155]">
+                  <li>
+                    <button 
+                      type="button" 
+                      onClick={() => handleNavigate('home')} 
+                      className="hover:text-[#004872] hover:underline font-semibold cursor-pointer flex items-center gap-1"
+                    >
+                      <HomeIcon className="w-4 h-4" />
+                      <span>Home</span>
+                    </button>
+                  </li>
+                  <li aria-hidden="true">
+                    <ChevronRight className="w-4 h-4 text-slate-400" />
+                  </li>
+                  <li>
+                    <span className="font-bold text-[#004872]" aria-current="page">Events &amp; Programs</span>
+                  </li>
+                </ol>
+
+                <button
+                  type="button"
+                  onClick={() => handleNavigate('booking')}
+                  className="hidden sm:inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-white bg-[#004872] px-4 py-2 rounded-xl hover:bg-[#1b6091] transition-colors cursor-pointer shadow-2xs"
+                >
+                  Invite Us to Speak →
+                </button>
+              </div>
+            </nav>
+
+            <PastEventsSection onNavigate={handleNavigate} />
+          </div>
+        )}
+
+        {/* 5. OUR SERVICES PAGE: Dedicated 10 Core Services with Category Filters */}
         {currentPage === 'services' && (
           <div>
-            {/* Accessible Breadcrumb Header */}
             <nav aria-label="Breadcrumb" className="bg-[#eef4ff] border-b border-[#dfe9f8] py-4 px-4 sm:px-8">
               <div className="max-w-7xl mx-auto flex items-center justify-between text-sm sm:text-base">
                 <ol className="flex items-center gap-2 text-[#334155]">
@@ -174,10 +321,9 @@ export default function App() {
           </div>
         )}
 
-        {/* 3. ABOUT US PAGE: Mission, Vision, Core Values, CAC Certificate */}
+        {/* 5. ABOUT US PAGE: Mission, Vision, Core Values, CAC Certificate */}
         {currentPage === 'about' && (
           <div>
-            {/* Accessible Breadcrumb Header */}
             <nav aria-label="Breadcrumb" className="bg-[#eef4ff] border-b border-[#dfe9f8] py-4 px-4 sm:px-8">
               <div className="max-w-7xl mx-auto flex items-center justify-between text-sm sm:text-base">
                 <ol className="flex items-center gap-2 text-[#334155]">
@@ -213,10 +359,9 @@ export default function App() {
           </div>
         )}
 
-        {/* 4. BOOKING PAGE: Dedicated Consultation Booking & Intake Workflow */}
+        {/* 6. BOOKING PAGE: Dedicated Consultation Booking & Intake Workflow */}
         {currentPage === 'booking' && (
           <div>
-            {/* Accessible Breadcrumb Header */}
             <nav aria-label="Breadcrumb" className="bg-[#eef4ff] border-b border-[#dfe9f8] py-4 px-4 sm:px-8">
               <div className="max-w-7xl mx-auto flex items-center justify-between text-sm sm:text-base">
                 <ol className="flex items-center gap-2 text-[#334155]">
@@ -256,10 +401,9 @@ export default function App() {
           </div>
         )}
 
-        {/* 5. DONATE PAGE: Dedicated Support & Contribution Portal */}
+        {/* 7. DONATE PAGE: Dedicated Support & Contribution Portal */}
         {currentPage === 'donate' && (
           <div>
-            {/* Accessible Breadcrumb Header */}
             <nav aria-label="Breadcrumb" className="bg-[#eef4ff] border-b border-[#dfe9f8] py-4 px-4 sm:px-8">
               <div className="max-w-7xl mx-auto flex items-center justify-between text-sm sm:text-base">
                 <ol className="flex items-center gap-2 text-[#334155]">
@@ -295,10 +439,9 @@ export default function App() {
           </div>
         )}
 
-        {/* 6. FAQ PAGE: Searchable Knowledge Base & Objections */}
+        {/* 8. FAQ PAGE: Searchable Knowledge Base & Objections */}
         {currentPage === 'faq' && (
           <div>
-            {/* Accessible Breadcrumb Header */}
             <nav aria-label="Breadcrumb" className="bg-[#eef4ff] border-b border-[#dfe9f8] py-4 px-4 sm:px-8">
               <div className="max-w-7xl mx-auto flex items-center justify-between text-sm sm:text-base">
                 <ol className="flex items-center gap-2 text-[#334155]">
@@ -336,10 +479,9 @@ export default function App() {
           </div>
         )}
 
-        {/* 7. CONTACT PAGE: Direct Communications & Ojo Lagos Location */}
+        {/* 9. CONTACT PAGE: Direct Communications & Ojo Lagos Location */}
         {currentPage === 'contact' && (
           <div>
-            {/* Accessible Breadcrumb Header */}
             <nav aria-label="Breadcrumb" className="bg-[#eef4ff] border-b border-[#dfe9f8] py-4 px-4 sm:px-8">
               <div className="max-w-7xl mx-auto flex items-center justify-between text-sm sm:text-base">
                 <ol className="flex items-center gap-2 text-[#334155]">

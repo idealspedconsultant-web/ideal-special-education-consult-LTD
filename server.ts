@@ -9,7 +9,7 @@ import { EmailBuilder, SmtpClient, ClientConfiguration } from './src/services/em
 const app = express();
 const PORT = 3000;
 
-app.use(express.json({ limit: '1mb' }));
+app.use(express.json({ limit: '15mb' }));
 
 // File-backed persistence fallback with Vercel serverless /tmp compatibility
 const isVercel = process.env.VERCEL === '1' || Boolean(process.env.AWS_LAMBDA_FUNCTION_NAME);
@@ -29,6 +29,7 @@ interface StoredData {
   contacts: any[];
   donations: any[];
   emailLogs?: EmailLogRecord[];
+  events?: any[];
 }
 
 function loadData(): StoredData {
@@ -40,7 +41,7 @@ function loadData(): StoredData {
   } catch (err) {
     // Fresh in-memory fallback
   }
-  return { bookings: [], contacts: [], donations: [], emailLogs: [] };
+  return { bookings: [], contacts: [], donations: [], emailLogs: [], events: [] };
 }
 
 function saveData(data: StoredData) {
@@ -762,6 +763,29 @@ app.patch('/api/submissions/:type/:id/status', (req: Request, res: Response) => 
   } catch (err: any) {
     console.error('Status update error:', err);
     res.status(500).json({ success: false, error: 'Failed to update status.' });
+  }
+});
+
+// 8b. Programmes & Events Slide Deck Controller (Authorized Access)
+app.get('/api/events', (req: Request, res: Response) => {
+  res.json({
+    success: true,
+    events: database.events || [],
+  });
+});
+
+app.post('/api/events', (req: Request, res: Response) => {
+  try {
+    const { events } = req.body;
+    if (!Array.isArray(events)) {
+      return res.status(400).json({ success: false, error: 'Events array is required.' });
+    }
+    database.events = events;
+    saveData(database);
+    res.json({ success: true, count: events.length, message: 'Programme slides updated successfully.' });
+  } catch (err: any) {
+    console.error('Events save error:', err);
+    res.status(500).json({ success: false, error: 'Failed to save programme slides.' });
   }
 });
 

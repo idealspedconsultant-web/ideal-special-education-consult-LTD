@@ -11,6 +11,7 @@ import {
   Megaphone, 
   FileText, 
   Ear,
+  Eye,
   ArrowRight,
   CheckCircle,
   X,
@@ -42,6 +43,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
       case 'Megaphone': return <Megaphone className={iconClass} />;
       case 'FileText': return <FileText className={iconClass} />;
       case 'Ear': return <Ear className={iconClass} />;
+      case 'Eye': return <Eye className={iconClass} />;
       default: return <Sparkles className={iconClass} />;
     }
   };
@@ -50,7 +52,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
   const filteredServices = SERVICES_LIST.filter(s => {
     if (activeFilter === 'all') return true;
     if (activeFilter === 'direct-learner') {
-      return ['early-intervention', 'learning-support', 'individual-support-plans', 'deaf-inclusion-and-accessibility'].includes(s.id);
+      return ['early-intervention', 'learning-support', 'individual-support-plans', 'sensory-and-disability-accessibility', 'deaf-inclusion-and-accessibility'].includes(s.id);
     }
     if (activeFilter === 'school-educator') {
       return ['special-education-consultation', 'school-inclusion-support', 'teacher-training', 'individual-support-plans'].includes(s.id);
@@ -303,6 +305,24 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
                   ))}
                 </div>
               </div>
+
+              {/* Age Categorization (when applicable, e.g. Early Intervention) */}
+              {selectedService.ageCategories && (
+                <div className="mb-6 bg-[#f0f9ed] p-4 rounded-2xl border border-[#b3f092]">
+                  <h4 className="font-headline text-xs font-bold text-[#2e7d32] uppercase tracking-wider mb-2.5">
+                    Age Categorization &amp; Developmental Focus
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {selectedService.ageCategories.map((ac, idx) => (
+                      <div key={idx} className="bg-white p-3 rounded-xl border border-[#c8e6c9]">
+                        <span className="text-xs font-bold text-[#2e7d32] block">{ac.category}</span>
+                        <strong className="text-xs text-[#121c27] block font-semibold">{ac.ageRange}</strong>
+                        <p className="text-[11px] text-[#475569] mt-1 leading-snug">{ac.focus}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Target Beneficiaries */}
               <div className="mb-6">
