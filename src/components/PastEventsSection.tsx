@@ -158,60 +158,59 @@ export const PastEventsSection: React.FC<PastEventsSectionProps> = ({ onNavigate
     <section 
       id="past-events"
       aria-label="Events and Program Slideshow"
-      className="py-12 sm:py-16 bg-[#071624] text-white relative overflow-hidden"
+      className="py-5 sm:py-12 md:py-16 bg-[#071624] text-white relative overflow-hidden"
     >
       {/* Decorative ambient gradients */}
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#0074b6]/15 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#366a1d]/15 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
         
         {/* Top Header & 10s Timer Controls */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-5">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2.5 sm:gap-4 mb-2.5 sm:mb-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-xs font-bold text-[#b3f092] uppercase tracking-wider mb-2">
-              <Sparkles className="w-3.5 h-3.5 text-[#b3f092]" />
+            <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/10 border border-white/15 text-[9px] xs:text-[10px] sm:text-xs font-bold text-[#b3f092] uppercase tracking-wider mb-1">
+              <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#b3f092]" />
               <span>Events &amp; Programs</span>
             </div>
-            <h2 className="font-headline text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white">
+            <h2 className="font-headline text-base xs:text-lg sm:text-2xl md:text-3xl font-extrabold tracking-tight text-white">
               Events Showcase &amp; Media Slides
             </h2>
           </div>
 
           {/* 10s Autoplay Indicator & Play/Pause */}
-          <div className="flex items-center gap-3 self-start sm:self-auto bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-2xl border border-white/15">
-            <div className="flex items-center gap-2 text-xs font-medium text-slate-300">
-              <Clock className="w-3.5 h-3.5 text-[#b3f092]" />
-              <span>10s Auto-Scroll:</span>
+          <div className="flex items-center gap-2 self-start sm:self-auto bg-white/10 backdrop-blur-md px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-lg sm:rounded-2xl border border-white/15">
+            <div className="flex items-center gap-1.5 text-[10px] sm:text-xs font-medium text-slate-300">
+              <Clock className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-[#b3f092]" />
+              <span className="hidden xs:inline">10s Auto-Scroll:</span>
+              <span className="xs:hidden">Auto:</span>
               <span className={`font-bold ${isPlaying && !isHovered && !activeVideoPlaying ? 'text-[#b3f092]' : 'text-amber-300'}`}>
-                {activeVideoPlaying ? 'Paused (Video)' : isHovered ? 'Paused (Hover)' : isPlaying ? 'Active' : 'Paused'}
+                {activeVideoPlaying ? 'Video' : isHovered ? 'Hover' : isPlaying ? 'Active' : 'Paused'}
               </span>
             </div>
 
-            <div className="h-3.5 w-px bg-white/20" />
+            <div className="h-3 w-px bg-white/20" />
 
             <button
               type="button"
               onClick={() => setIsPlaying(!isPlaying)}
-              className="p-1 rounded-lg bg-white/15 hover:bg-white/25 text-white transition-colors cursor-pointer"
+              className="p-1 rounded-md sm:rounded-lg bg-white/15 hover:bg-white/25 text-white transition-colors cursor-pointer"
               title={isPlaying ? "Pause 10s Slideshow" : "Resume 10s Slideshow"}
               aria-label={isPlaying ? "Pause 10s Slideshow" : "Resume 10s Slideshow"}
             >
-              {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+              {isPlaying ? <Pause className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5" /> : <Play className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5" />}
             </button>
           </div>
         </div>
 
         {/* =========================================================================
-            ONLY THE SLIDE: Clean, full-width presentation of pictures & videos
-            - Integrates both upcoming and past events
+            ONLY THE SLIDE: Clean, responsive presentation of pictures & videos
             - 10-Second Auto-Scroll
-            - Next & Previous arrows directly on the display
-            - No extra write-up columns or sections below
+            - Smaller, elegant video play button
+            - Next & Previous arrows sized comfortably for mobile and desktop
             ========================================================================= */}
         <div 
-          className="relative w-full rounded-3xl overflow-hidden bg-black border border-white/20 shadow-2xl group select-none"
-          style={{ height: 'clamp(380px, 64vh, 640px)' }}
+          className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-black border border-white/20 shadow-2xl group select-none h-[250px] xs:h-[310px] sm:h-[420px] md:h-[500px] lg:h-[600px]"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           tabIndex={0}
@@ -227,7 +226,7 @@ export const PastEventsSection: React.FC<PastEventsSectionProps> = ({ onNavigate
           aria-label="Events Slideshow"
         >
           {/* Top 10-Second Countdown Progress Bar */}
-          <div className="absolute top-0 left-0 right-0 h-1.5 bg-black/60 z-30 overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-1 sm:h-1.5 bg-black/60 z-30 overflow-hidden">
             <motion.div 
               className="h-full bg-gradient-to-r from-[#b3f092] via-[#00a6ff] to-[#b3f092]"
               style={{ width: `${progress}%` }}
@@ -264,20 +263,20 @@ export const PastEventsSection: React.FC<PastEventsSectionProps> = ({ onNavigate
                     }}
                   />
 
-                  {/* Center Play Button Overlay */}
+                  {/* Smaller, Refined Center Play Button Overlay */}
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                     <motion.button
                       type="button"
                       onClick={toggleVideoPlayback}
-                      whileHover={{ scale: 1.1 }}
+                      whileHover={{ scale: 1.08 }}
                       whileTap={{ scale: 0.92 }}
-                      className="pointer-events-auto w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#004872]/85 hover:bg-[#0074b6] border-2 border-white/90 text-white flex items-center justify-center shadow-2xl backdrop-blur-xs cursor-pointer transition-all"
+                      className="pointer-events-auto w-10 h-10 xs:w-12 xs:h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full bg-[#004872]/85 hover:bg-[#0074b6] border border-white/80 sm:border-2 text-white flex items-center justify-center shadow-xl backdrop-blur-xs cursor-pointer transition-all"
                       aria-label={activeVideoPlaying ? "Pause video presentation" : "Play video presentation"}
                     >
                       {activeVideoPlaying ? (
-                        <Pause className="w-8 h-8 text-white" />
+                        <Pause className="w-4 h-4 xs:w-5 xs:h-5 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
                       ) : (
-                        <Play className="w-8 h-8 text-white fill-current ml-1" />
+                        <Play className="w-4 h-4 xs:w-5 xs:h-5 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white fill-current ml-0.5" />
                       )}
                     </motion.button>
                   </div>
@@ -286,10 +285,10 @@ export const PastEventsSection: React.FC<PastEventsSectionProps> = ({ onNavigate
                   <button
                     type="button"
                     onClick={toggleAudio}
-                    className="absolute top-4 right-4 z-20 p-2.5 rounded-xl bg-black/70 hover:bg-black/90 backdrop-blur-md text-white border border-white/25 transition-colors cursor-pointer"
+                    className="absolute top-2 xs:top-3 sm:top-4 right-2 xs:right-3 sm:right-4 z-20 p-1.5 xs:p-2 sm:p-2.5 rounded-lg sm:rounded-xl bg-black/70 hover:bg-black/90 backdrop-blur-md text-white border border-white/25 transition-colors cursor-pointer"
                     aria-label={isMuted ? "Unmute audio" : "Mute audio"}
                   >
-                    {isMuted ? <VolumeX className="w-5 h-5 text-slate-300" /> : <Volume2 className="w-5 h-5 text-[#b3f092]" />}
+                    {isMuted ? <VolumeX className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-slate-300" /> : <Volume2 className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-[#b3f092]" />}
                   </button>
                 </div>
               ) : (
@@ -308,31 +307,31 @@ export const PastEventsSection: React.FC<PastEventsSectionProps> = ({ onNavigate
           </AnimatePresence>
 
           {/* Top Status & Slide Counter Badge */}
-          <div className="absolute top-4 left-4 z-20 flex items-center gap-2">
-            <span className={`px-3 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider shadow-md backdrop-blur-md border ${
+          <div className="absolute top-2 xs:top-3 sm:top-4 left-2 xs:left-3 sm:left-4 z-20 flex items-center gap-1 sm:gap-2">
+            <span className={`px-1.5 py-0.5 xs:px-2.5 xs:py-1 sm:px-3 sm:py-1.5 rounded-md sm:rounded-xl text-[8px] xs:text-[9px] sm:text-xs font-bold uppercase tracking-wider shadow-md backdrop-blur-md border ${
               currentSlide.status === 'upcoming'
                 ? 'bg-amber-500/90 text-slate-950 border-amber-300'
                 : 'bg-[#004872]/85 text-white border-white/20'
             }`}>
-              {currentSlide.status === 'upcoming' ? '★ Upcoming Event' : 'Past Event Media'}
+              {currentSlide.status === 'upcoming' ? '★ Upcoming' : 'Past Media'}
             </span>
 
-            <span className="bg-black/75 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-white/20 shadow-md">
+            <span className="bg-black/75 backdrop-blur-md text-white text-[8px] xs:text-[9px] sm:text-xs font-bold px-1.5 py-0.5 xs:px-2.5 xs:py-1 sm:px-3 sm:py-1.5 rounded-md sm:rounded-xl border border-white/20 shadow-md">
               {currentIndex + 1} / {slides.length}
             </span>
           </div>
 
           {/* Minimal Floating Caption on Display */}
-          <div className="absolute bottom-5 left-16 right-16 z-20 pointer-events-none flex flex-col items-center text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-[11px] sm:text-xs font-bold text-[#b3f092] uppercase tracking-wider mb-2 shadow-md">
-              {currentSlide.type === 'video' ? <Video className="w-3.5 h-3.5" /> : <ImageIcon className="w-3.5 h-3.5" />}
-              <span>{currentSlide.category}</span>
+          <div className="absolute bottom-1.5 xs:bottom-2.5 sm:bottom-5 left-8 xs:left-10 sm:left-16 right-8 xs:right-10 sm:right-16 z-20 pointer-events-none flex flex-col items-center text-center">
+            <div className="inline-flex items-center gap-1 px-1.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/20 text-[8px] xs:text-[9px] sm:text-xs font-bold text-[#b3f092] uppercase tracking-wider mb-1 sm:mb-1.5 shadow-md max-w-full truncate">
+              {currentSlide.type === 'video' ? <Video className="w-2.5 h-2.5 sm:w-3 sm:h-3 shrink-0" /> : <ImageIcon className="w-2.5 h-2.5 sm:w-3 sm:h-3 shrink-0" />}
+              <span className="truncate">{currentSlide.category}</span>
               <span className="text-white/40">•</span>
-              <span className="text-white/90">{currentSlide.date}</span>
+              <span className="text-white/90 truncate">{currentSlide.date}</span>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-2.5 max-w-2xl bg-black/70 backdrop-blur-sm px-4 py-2 rounded-2xl border border-white/15">
-              <h3 className="font-headline text-sm sm:text-base md:text-lg font-bold text-white drop-shadow-md truncate text-center">
+            <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2.5 max-w-full sm:max-w-2xl bg-black/75 backdrop-blur-sm px-2 py-0.5 xs:px-2.5 xs:py-1 sm:px-4 sm:py-2 rounded-lg sm:rounded-2xl border border-white/15">
+              <h3 className="font-headline text-[10px] xs:text-[11px] sm:text-sm md:text-base font-bold text-white drop-shadow-md truncate text-center max-w-[200px] xs:max-w-[260px] sm:max-w-md leading-tight">
                 {currentSlide.title}
               </h3>
 
@@ -341,26 +340,26 @@ export const PastEventsSection: React.FC<PastEventsSectionProps> = ({ onNavigate
                 <button
                   type="button"
                   onClick={() => setRegisteringEvent(currentSlide)}
-                  className="pointer-events-auto px-3.5 py-1.5 rounded-xl text-xs font-bold text-[#003453] bg-[#b3f092] hover:bg-[#c6f7ad] transition-all cursor-pointer shadow-md flex items-center gap-1 shrink-0"
+                  className="pointer-events-auto px-2 py-0.5 sm:px-3.5 sm:py-1.5 rounded-md sm:rounded-xl text-[8px] xs:text-[9px] sm:text-xs font-bold text-[#003453] bg-[#b3f092] hover:bg-[#c6f7ad] transition-all cursor-pointer shadow-md flex items-center gap-0.5 sm:gap-1 shrink-0"
                 >
-                  <span>Register / RSVP</span>
-                  <ArrowRight className="w-3 h-3" />
+                  <span>RSVP</span>
+                  <ArrowRight className="w-2 h-2 sm:w-3 sm:h-3" />
                 </button>
               )}
             </div>
           </div>
 
           {/* =========================================================================
-              NEXT AND PREVIOUS ARROWS DIRECTLY ON THE DISPLAY
+              NEXT AND PREVIOUS ARROWS DIRECTLY ON THE DISPLAY (RESPONSIVE)
               ========================================================================= */}
           <button
             type="button"
             id="btn-display-prev-slide"
             onClick={handlePrev}
             aria-label="Previous slide"
-            className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-black/70 hover:bg-[#004872] active:scale-95 text-white flex items-center justify-center border-2 border-white/40 backdrop-blur-md shadow-xl transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#b3f092]"
+            className="absolute left-1.5 xs:left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-7 h-7 xs:w-8 xs:h-8 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-black/70 hover:bg-[#004872] active:scale-95 text-white flex items-center justify-center border border-white/40 sm:border-2 backdrop-blur-md shadow-xl transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#b3f092]"
           >
-            <ChevronLeft className="w-7 h-7 sm:w-8 sm:h-8 stroke-[2.5]" />
+            <ChevronLeft className="w-4 h-4 xs:w-5 xs:h-5 sm:w-7 sm:h-7 md:w-8 md:h-8 stroke-[2.5]" />
           </button>
 
           <button
@@ -368,14 +367,14 @@ export const PastEventsSection: React.FC<PastEventsSectionProps> = ({ onNavigate
             id="btn-display-next-slide"
             onClick={handleNext}
             aria-label="Next slide"
-            className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-black/70 hover:bg-[#004872] active:scale-95 text-white flex items-center justify-center border-2 border-white/40 backdrop-blur-md shadow-xl transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#b3f092]"
+            className="absolute right-1.5 xs:right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-7 h-7 xs:w-8 xs:h-8 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-black/70 hover:bg-[#004872] active:scale-95 text-white flex items-center justify-center border border-white/40 sm:border-2 backdrop-blur-md shadow-xl transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#b3f092]"
           >
-            <ChevronRight className="w-7 h-7 sm:w-8 sm:h-8 stroke-[2.5]" />
+            <ChevronRight className="w-4 h-4 xs:w-5 xs:h-5 sm:w-7 sm:h-7 md:w-8 md:h-8 stroke-[2.5]" />
           </button>
         </div>
 
         {/* Quick Dots / Direct Slide Navigators */}
-        <div className="flex items-center justify-center gap-2 mt-4">
+        <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-2.5 sm:mt-4">
           {slides.map((slide, idx) => (
             <button
               key={slide.id}
@@ -386,8 +385,8 @@ export const PastEventsSection: React.FC<PastEventsSectionProps> = ({ onNavigate
               }}
               className={`transition-all rounded-full cursor-pointer ${
                 currentIndex === idx 
-                  ? 'w-8 h-2.5 bg-[#b3f092] shadow-sm' 
-                  : 'w-2.5 h-2.5 bg-white/25 hover:bg-white/50'
+                  ? 'w-5 xs:w-7 sm:w-8 h-1.5 sm:h-2.5 bg-[#b3f092] shadow-sm' 
+                  : 'w-1.5 xs:w-2 sm:w-2.5 h-1.5 sm:h-2.5 bg-white/25 hover:bg-white/50'
               }`}
               aria-label={`Jump to slide ${idx + 1}: ${slide.title}`}
               title={`${slide.status === 'upcoming' ? '[Upcoming] ' : ''}${slide.title}`}
@@ -413,24 +412,24 @@ export const PastEventsSection: React.FC<PastEventsSectionProps> = ({ onNavigate
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.94, y: 20 }}
               transition={{ duration: 0.25 }}
-              className="bg-slate-900 border border-white/20 rounded-3xl max-w-lg w-full p-6 sm:p-7 shadow-2xl text-white relative"
+              className="bg-slate-900 border border-white/20 rounded-2xl sm:rounded-3xl max-w-lg w-full p-4 sm:p-7 shadow-2xl text-white relative"
             >
               {/* Header */}
-              <div className="flex items-start justify-between gap-4 pb-4 border-b border-white/10">
+              <div className="flex items-start justify-between gap-3 pb-3 sm:pb-4 border-b border-white/10">
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-amber-300 bg-amber-400/20 px-2.5 py-1 rounded-md border border-amber-300/30">
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-amber-300 bg-amber-400/20 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md border border-amber-300/30">
                     Upcoming Event Registration
                   </span>
-                  <h3 id="reg-modal-title" className="font-headline text-lg sm:text-xl font-bold text-white mt-2 leading-snug">
+                  <h3 id="reg-modal-title" className="font-headline text-sm xs:text-base sm:text-xl font-bold text-white mt-1.5 sm:mt-2 leading-snug">
                     {registeringEvent.title}
                   </h3>
-                  <div className="flex flex-wrap items-center gap-3 text-xs text-slate-300 mt-1.5">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-[10px] sm:text-xs text-slate-300 mt-1 sm:mt-1.5">
                     <span className="flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5 text-[#b3f092]" />
+                      <Calendar className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#b3f092]" />
                       {registeringEvent.date}
                     </span>
                     <span className="flex items-center gap-1">
-                      <MapPin className="w-3.5 h-3.5 text-[#00a6ff]" />
+                      <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00a6ff]" />
                       {registeringEvent.location}
                     </span>
                   </div>
@@ -439,29 +438,29 @@ export const PastEventsSection: React.FC<PastEventsSectionProps> = ({ onNavigate
                 <button
                   type="button"
                   onClick={() => setRegisteringEvent(null)}
-                  className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer shrink-0"
+                  className="p-1 sm:p-1.5 rounded-lg sm:rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer shrink-0"
                   aria-label="Close dialog"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
               </div>
 
               {registrationSubmitted ? (
-                <div className="py-8 text-center space-y-3">
-                  <div className="w-14 h-14 rounded-full bg-[#366a1d]/50 text-[#b3f092] flex items-center justify-center mx-auto border border-[#b3f092]/40">
-                    <CheckCircle2 className="w-8 h-8" />
+                <div className="py-6 sm:py-8 text-center space-y-2 sm:space-y-3">
+                  <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-[#366a1d]/50 text-[#b3f092] flex items-center justify-center mx-auto border border-[#b3f092]/40">
+                    <CheckCircle2 className="w-6 h-6 sm:w-8 sm:h-8" />
                   </div>
-                  <h4 className="font-headline text-lg font-bold text-white">
+                  <h4 className="font-headline text-sm sm:text-lg font-bold text-white">
                     Registration Confirmed!
                   </h4>
-                  <p className="text-xs sm:text-sm text-slate-300 max-w-sm mx-auto">
+                  <p className="text-[11px] sm:text-sm text-slate-300 max-w-sm mx-auto">
                     We have reserved your spot for this upcoming program. You will receive event access instructions and updates.
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleRegisterSubmit} className="mt-4 space-y-3.5">
+                <form onSubmit={handleRegisterSubmit} className="mt-3 sm:mt-4 space-y-2.5 sm:space-y-3.5">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">
+                    <label className="block text-[11px] sm:text-xs font-semibold text-slate-300 mb-0.5 sm:mb-1">
                       Full Name *
                     </label>
                     <input
@@ -470,13 +469,13 @@ export const PastEventsSection: React.FC<PastEventsSectionProps> = ({ onNavigate
                       placeholder="e.g. Adebayo Ogunlesi"
                       value={regForm.fullName}
                       onChange={(e) => setRegForm({ ...regForm, fullName: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/15 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#b3f092] placeholder-slate-500"
+                      className="w-full px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 rounded-lg sm:rounded-xl bg-white/5 border border-white/15 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#b3f092] placeholder-slate-500"
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      <label className="block text-[11px] sm:text-xs font-semibold text-slate-300 mb-0.5 sm:mb-1">
                         Email Address *
                       </label>
                       <input
@@ -485,11 +484,11 @@ export const PastEventsSection: React.FC<PastEventsSectionProps> = ({ onNavigate
                         placeholder="you@example.com"
                         value={regForm.email}
                         onChange={(e) => setRegForm({ ...regForm, email: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/15 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#b3f092] placeholder-slate-500"
+                        className="w-full px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 rounded-lg sm:rounded-xl bg-white/5 border border-white/15 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#b3f092] placeholder-slate-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      <label className="block text-[11px] sm:text-xs font-semibold text-slate-300 mb-0.5 sm:mb-1">
                         Phone / WhatsApp *
                       </label>
                       <input
@@ -498,19 +497,19 @@ export const PastEventsSection: React.FC<PastEventsSectionProps> = ({ onNavigate
                         placeholder="+234 800 000 0000"
                         value={regForm.phoneNumber}
                         onChange={(e) => setRegForm({ ...regForm, phoneNumber: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/15 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#b3f092] placeholder-slate-500"
+                        className="w-full px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 rounded-lg sm:rounded-xl bg-white/5 border border-white/15 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#b3f092] placeholder-slate-500"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">
+                    <label className="block text-[11px] sm:text-xs font-semibold text-slate-300 mb-0.5 sm:mb-1">
                       Registering As:
                     </label>
                     <select
                       value={regForm.attendeeType}
                       onChange={(e) => setRegForm({ ...regForm, attendeeType: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-white/15 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#b3f092]"
+                      className="w-full px-2.5 py-1.5 sm:px-3.5 sm:py-2.5 rounded-lg sm:rounded-xl bg-slate-800 border border-white/15 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#b3f092]"
                     >
                       <option value="Parent / Guardian">Parent / Guardian</option>
                       <option value="Classroom Teacher / Educator">Classroom Teacher / Educator</option>
@@ -520,19 +519,19 @@ export const PastEventsSection: React.FC<PastEventsSectionProps> = ({ onNavigate
                     </select>
                   </div>
 
-                  <div className="pt-3 border-t border-white/10 flex items-center justify-end gap-3">
+                  <div className="pt-2 sm:pt-3 border-t border-white/10 flex items-center justify-end gap-2 sm:gap-3">
                     <button
                       type="button"
                       onClick={() => setRegisteringEvent(null)}
-                      className="px-4 py-2 rounded-xl text-xs font-medium text-slate-300 hover:text-white bg-white/10 hover:bg-white/15 transition-colors cursor-pointer"
+                      className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-medium text-slate-300 hover:text-white bg-white/10 hover:bg-white/15 transition-colors cursor-pointer"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
-                      className="px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-[#003453] bg-[#b3f092] hover:bg-[#a6ec81] transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
+                      className="px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-lg sm:rounded-xl text-[11px] sm:text-xs md:text-sm font-bold text-[#003453] bg-[#b3f092] hover:bg-[#a6ec81] transition-all cursor-pointer flex items-center gap-1 shadow-sm"
                     >
-                      <Send className="w-3.5 h-3.5" />
+                      <Send className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                       <span>Confirm Reservation</span>
                     </button>
                   </div>
